@@ -1,26 +1,30 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from './logo.svg';
+import { Redirect, Route } from 'react-router-dom';
 import './App.css';
+import AbsoluteRedirect from './components/AbsoluteRedirect';
+const App = () => {
+  const [code, setCode] = useState()
+  const [token, setToken] = useState()
+  const [user, setUser] = useState() 
+  
+  if (user) {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <p>
+            User logged in
+          </p>
+        </header> 
+      </div>
+    );
+  } else {
+    var redirect_url = `https://gurbs_oidc_server/auth?response_type=code&redirect_url=${window.location.href}`
+    return (
+      <AbsoluteRedirect to={redirect_url} />
+    );
+  }
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
 }
 
 export default App;
