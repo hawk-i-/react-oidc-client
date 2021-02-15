@@ -1,13 +1,10 @@
 import React, {useState} from 'react';
-import logo from './logo.svg';
-import { Redirect, Route } from 'react-router-dom';
 import './App.css';
 import AbsoluteRedirect from './components/AbsoluteRedirect';
+
 const App = () => {
-  const [code, setCode] = useState()
-  const [token, setToken] = useState()
   const [user, setUser] = useState() 
-  
+  console.log(process.env)
   if (user) {
     return (
       <div className="App">
@@ -19,7 +16,7 @@ const App = () => {
       </div>
     );
   } else {
-    var redirect_url = `https://gurbs_oidc_server/auth?response_type=code&redirect_url=${window.location.href}`
+    var redirect_url = `${process.env.REACT_APP_AUTH_PROVIDER_URI}?response_type=code&client_id=${process.env.REACT_APP_AUTH_CLIENT_ID}&redirect_uri=${window.location.origin}/callback`
     return (
       <AbsoluteRedirect to={redirect_url} />
     );

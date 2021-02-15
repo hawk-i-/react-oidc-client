@@ -1,14 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { 
+  BrowserRouter,
+  Switch,
+  Route
+} from 'react-router-dom';
 import './index.css';
 import App from './App';
+import Callback from './views/Callback';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+    <Switch>
+      <Route path="/callback">
+        <Callback />
+      </Route>
+      <Route path="/">
+        <App />
+      </Route>
+    </Switch>
+  </BrowserRouter>
+  ,
   document.getElementById('root')
 );
 
